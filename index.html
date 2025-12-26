@@ -1,314 +1,374 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Windows Error</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        <!--=============== FAVICON ===============-->
-        <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
-        
-        <!--=============== REMIX ICONS ===============-->
-        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+      body {
+        font-family: "Tahoma", "MS Sans Serif", sans-serif;
+        background: #008080;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+      }
 
-        <!--=============== CSS ===============-->
-        <link rel="stylesheet" href="assets/css/styles.css">
+      .error-window {
+        width: 500px;
+        background: #ece9d8;
+        border: 2px solid;
+        border-color: #0831d9 #0831d9 #001d7c #001d7c;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        position: absolute;
+        transition: all 0.3s ease;
+      }
 
-        <title>Fatoni Aridho - Site</title>
-    </head>
-    <body>
-        <!--=============== HEADER ===============-->
-        <header class="profile container">
-            <!-- Theme button -->
-            <i class="ri-moon-line change-theme" id="theme-button"></i>
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        10%,
+        30%,
+        50%,
+        70%,
+        90% {
+          transform: translateX(-10px);
+        }
+        20%,
+        40%,
+        60%,
+        80% {
+          transform: translateX(10px);
+        }
+      }
 
-            <div class="profile__container grid">
-                <div class="profile__data">
-                    <div class="profile__border">
-                        <div class="profile__perfil">
-                            <!-- Insert your image, according to the example size of the portfolio -->
-                            <img src="assets/img/profil.jpg" alt="">
-                        </div>
-                    </div>
+      .shake-animation {
+        animation: shake 0.3s;
+      }
 
-                    <h2 class="profile__name">Fatoni Aridho</h2>
-                    <h3 class="profile__profession">Visual Design</h3>
+      .title-bar {
+        background: linear-gradient(to right, #0058e6, #4a9eff);
+        padding: 4px 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: default;
+      }
 
-                    <ul class="profile__social">
-                        <a href="https://www.instagram.com/fatoniardh/" target="_blank" class="profile__social-link">
-                            <i class="ri-instagram-line"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/" target="_blank" class="profile__social-link">
-                            <i class="ri-linkedin-box-line"></i>
-                        </a>
-                        <a href="https://fatoniaridho.github.io/" target="_blank" class="profile__social-link">
-                            <i class="ri-github-line"></i>
-                        </a>
-                    </ul>
-                </div>
+      .title-text {
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
 
-                <div class="profile__info grid">
-                    <div class="profile__info-group">
-                        <h3 class="profile__info-number">7</h3>
-                        <p class="profile__info-description">
-                            Years of <br> work
-                        </p>
-                    </div>
-                    <div class="profile__info-group">
-                        <h3 class="profile__info-number">+124</h3>
-                        <p class="profile__info-description">
-                            Completed <br> projects
-                        </p>
-                    </div>
-                    <div class="profile__info-group">
-                        <h3 class="profile__info-number">+100</h3>
-                        <p class="profile__info-description">Satisfied <br> customers</p>
-                    </div>
-                </div>
+      .title-icon {
+        width: 16px;
+        height: 16px;
+        background: white;
+        border: 1px solid #000;
+        display: inline-block;
+      }
 
-                <div class="profile__buttons">
-                    <!-- Insert your CV -->
-                    <a download="" href="assets/pdf/Fatoni-Cv.jpeg" class="button">
-                        Download CV <i class="ri-download-line"></i>
-                    </a>
+      .close-btn {
+        width: 18px;
+        height: 18px;
+        background: #c0c0c0;
+        border: 1px solid;
+        border-color: #ffffff #000000 #000000 #ffffff;
+        font-size: 11px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #000;
+      }
 
-                    <div class="profile__buttons-small">
-                        <!-- Insert a real number plus country code -->
-                        <a href="https://api.whatsapp.com/send?phone=6281252368346&text=Hello, more information!" target="_blank" class="button button__small button__gray">
-                            <i class="ri-whatsapp-line"></i>
-                        </a>
-                        <!-- Insert your brand name or profile -->
-                        <a href="https://m.me/mochfatoniaridho" target="_blank" class="button button__small button__gray">
-                            <i class="ri-messenger-line"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </header>
+      .close-btn:hover {
+        background: #d4d0c8;
+      }
 
-        <!--=============== MAIN ===============-->
-        <main class="main">
-            <section class="filters container">
-                <!--=============== FILTERS TABS ===============-->
-                <ul class="filters__content">
-                    <button class="filters__button filter-tab-active" data-target="#projects">
-                        Projects
-                    </button>
-                    <button class="filters__button" data-target="#skills">
-                        Skills
-                    </button>
-                </ul>
+      .close-btn:active {
+        border-color: #000000 #ffffff #ffffff #000000;
+      }
 
-                <div class="filters__sections">
-                    <!--=============== PROJECTS ===============-->
-                    <div class="projects__content grid filters__active" data-content id="projects">
-                        <article class="projects__card">
-                            <!-- Insert your image in a rectangular format (Ex: 600 x 400, 1000 x 800, 1200 x 1000, etc) -->
-                            <img src="assets/img/graphic.jpg" alt="" class="projects__img">
+      .error-content {
+        padding: 20px;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
 
-                            <div class="projects__modal">
-                                <div>
-                                    <span class="projects__subtitle">Graphic Design</span>
-                                    <h3 class="projects__title">Graphic</h3>
-                                    <a href="#" class="projects__button button button__small">
-                                        <i class="ri-link"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
+      .warning-icon {
+        width: 50px;
+        height: 50px;
+        flex-shrink: 0;
+        position: relative;
+      }
 
-                        <article class="projects__card">
-                            <img src="assets/img/prototype.jpg" alt="" class="projects__img">
+      .warning-triangle {
+        width: 0;
+        height: 0;
+        border-left: 25px solid transparent;
+        border-right: 25px solid transparent;
+        border-bottom: 43px solid #ffd700;
+        position: relative;
+        filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
+      }
 
-                            <div class="projects__modal">
-                                <div>
-                                    <span class="projects__subtitle">Web Design</span>
-                                    <h3 class="projects__title">Prototyping</h3>
-                                    <a href="#" class="projects__button button button__small">
-                                        <i class="ri-link"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
+      .warning-triangle::after {
+        content: "!";
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 32px;
+        font-weight: bold;
+        color: #000;
+      }
 
-                        <article class="projects__card">
-                            <img src="assets/img/desk.jpg" alt="" class="projects__img">
+      .error-message {
+        flex: 1;
+        font-size: 13px;
+        color: #000;
+        line-height: 1.4;
+      }
 
-                            <div class="projects__modal">
-                                <div>
-                                    <span class="projects__subtitle">Product Design</span>
-                                    <h3 class="projects__title">Setup Desk</h3>
-                                    <a href="https://www.instagram.com/screamland.id/" class="projects__button button button__small">
-                                        <i class="ri-link"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
+      .button-area {
+        padding: 0 20px 20px 20px;
+        display: flex;
+        justify-content: center;
+      }
 
-                        <article class="projects__card">
-                            <img src="assets/img/interior.jpg" alt="" class="projects__img">
+      .ok-button {
+        background: #c0c0c0;
+        border: 2px solid;
+        border-color: #ffffff #000000 #000000 #ffffff;
+        padding: 6px 30px;
+        font-size: 12px;
+        font-family: "Tahoma", sans-serif;
+        cursor: pointer;
+        min-width: 80px;
+      }
 
-                            <div class="projects__modal">
-                                <div>
-                                    <span class="projects__subtitle">Interior Design</span>
-                                    <h3 class="projects__title">Screamland.Id</h3>
-                                    <a href="https://fatoniaridho.github.io/screamland/" class="projects__button button button__small">
-                                        <i class="ri-link"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
+      .ok-button:hover {
+        background: #d4d0c8;
+      }
 
-                        <article class="projects__card">
-                            <img src="assets/img/dataset.jpg" alt="" class="projects__img">
+      .ok-button:active {
+        border-color: #000000 #ffffff #ffffff #000000;
+        padding: 7px 29px 5px 31px;
+      }
 
-                            <div class="projects__modal">
-                                <div>
-                                    <span class="projects__subtitle">Data Analyst</span>
-                                    <h3 class="projects__title">Statistik & Research</h3>
-                                    <a href="#" class="projects__button button button__small">
-                                        <i class="ri-link"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
+      .ok-button:focus {
+        outline: 1px dotted #000;
+        outline-offset: -4px;
+      }
 
-                    <!--=============== SKILLS ===============-->
-                    <div class="skills__content grid" data-content id="skills">
-                        <div class="skills__area">
-                            <h3 class="skills__title">Visual</h3>
-    
-                            <div class="skills__box">
-                                <div class="skills__group">
-                                    <div class="skills__data">
-                                        <i class="ri-checkbox-circle-line"></i>
-        
-                                        <div>
-                                            <h3 class="skills__name">Adobe Premier Pro</h3>
-                                            <span class="skills__level">Basic</span>
-                                        </div>
-                                    </div>
-        
-                                    <div class="skills__data">
-                                        <i class="ri-checkbox-circle-line"></i>
-        
-                                        <div>
-                                            <h3 class="skills__name">Corel Draw</h3>
-                                            <span class="skills__level">Advanced</span>
-                                        </div>
-                                    </div>
-        
-                                    <div class="skills__data">
-                                        <i class="ri-checkbox-circle-line"></i>
-        
-                                        <div>
-                                            <h3 class="skills__name">Adobe Ilustrator</h3>
-                                            <span class="skills__level">Advanced</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="skills__group">
-                                    <div class="skills__data">
-                                        <i class="ri-checkbox-circle-line"></i>
-        
-                                        <div>
-                                            <h3 class="skills__name">Figma</h3>
-                                            <span class="skills__level">Intermediate</span>
-                                        </div>
-                                    </div>
-        
-                                    <div class="skills__data">
-                                        <i class="ri-checkbox-circle-line"></i>
-        
-                                        <div>
-                                            <h3 class="skills__name">Adobe Photoshop</h3>
-                                            <span class="skills__level">Intermediate</span>
-                                        </div>
-                                    </div>
-        
-                                    <div class="skills__data">
-                                        <i class="ri-checkbox-circle-line"></i>
-        
-                                        <div>
-                                            <h3 class="skills__name">Adobe After Effect</h3>
-                                            <span class="skills__level">Basic</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+      @media (max-width: 768px) {
+        .error-window {
+          width: 90%;
+          max-width: 400px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-window" id="errorWindow">
+      <div class="title-bar">
+        <div class="title-text">
+          <span class="title-icon"></span>
+          Windows error
+        </div>
+        <div class="close-btn" onclick="handleClick()">✕</div>
+      </div>
 
-                        <div class="skills__area">
-                            <h3 class="skills__title">Data & 3D</h3>
-    
-                            <div class="skills__box">
-                                <div class="skills__group">
-                                    <div class="skills__data">
-                                        <i class="ri-checkbox-circle-line"></i>
-        
-                                        <div>
-                                            <h3 class="skills__name">Ms. Office</h3>
-                                            <span class="skills__level">Advanced</span>
-                                        </div>
-                                    </div>
-        
-                                    <div class="skills__data">
-                                        <i class="ri-checkbox-circle-line"></i>
-        
-                                        <div>
-                                            <h3 class="skills__name">SPSS</h3>
-                                            <span class="skills__level">Advance</span>
-                                        </div>
-                                    </div>
-        
-                                    <div class="skills__data">
-                                        <i class="ri-checkbox-circle-line"></i>
-        
-                                        <div>
-                                            <h3 class="skills__name">SketchUp</h3>
-                                            <span class="skills__level">Intermediate</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="skills__group">
-                                    <div class="skills__data">
-                                        <i class="ri-checkbox-circle-line"></i>
-        
-                                        <div>
-                                            <h3 class="skills__name">VSCode</h3>
-                                            <span class="skills__level">Basic</span>
-                                        </div>
-                                    </div>
-        
-                                    <div class="skills__data">
-                                        <i class="ri-checkbox-circle-line"></i>
-        
-                                        <div>
-                                            <h3 class="skills__name">Enscape</h3>
-                                            <span class="skills__level">Intermediate</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
+      <div class="error-content">
+        <div class="warning-icon">
+          <div class="warning-triangle"></div>
+        </div>
+        <div class="error-message">Click 'OK' to continue</div>
+      </div>
 
-        <!--=============== FOOTER ===============-->
-        <footer class="footer container">
-            <span class="footer__copy">
-                &#169; Fatoni Aridho. All rigths reserved
-            </span>
-        </footer>
+      <div class="button-area">
+        <button class="ok-button" onclick="handleClick()">OK</button>
+      </div>
+    </div>
 
-        <!--=============== SCROLLREVEAL ===============-->
-        <script src="assets/js/scrollreveal.min.js"></script>
+    <script>
+      let errorCount = 0;
+      let chaosMode = false;
+      let allDialogs = [];
+      let moveIntervals = [];
+      const errorWindow = document.getElementById("errorWindow");
 
-        <!--=============== MAIN JS ===============-->
-        <script src="assets/js/main.js"></script>
-    </body>
+      // Initialize position
+      function initPosition() {
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const dialogWidth = errorWindow.offsetWidth;
+        const dialogHeight = errorWindow.offsetHeight;
+
+        const centerX = (windowWidth - dialogWidth) / 2;
+        const centerY = (windowHeight - dialogHeight) / 2;
+
+        errorWindow.style.left = centerX + "px";
+        errorWindow.style.top = centerY + "px";
+      }
+
+      // Random position generator for any dialog
+      function moveDialogToRandomPosition(dialog) {
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const dialogWidth = dialog.offsetWidth;
+        const dialogHeight = dialog.offsetHeight;
+
+        // Random position with padding
+        const padding = 20;
+        const maxX = Math.max(padding, windowWidth - dialogWidth - padding);
+        const maxY = Math.max(padding, windowHeight - dialogHeight - padding);
+
+        const randomX = Math.max(padding, Math.random() * maxX);
+        const randomY = Math.max(padding, Math.random() * maxY);
+
+        dialog.style.left = randomX + "px";
+        dialog.style.top = randomY + "px";
+      }
+
+      // Move main dialog
+      function moveToRandomPosition() {
+        moveDialogToRandomPosition(errorWindow);
+      }
+
+      // Handle click
+      function handleClick() {
+        errorCount++;
+
+        // Shake effect
+        errorWindow.classList.add("shake-animation");
+        setTimeout(() => {
+          errorWindow.classList.remove("shake-animation");
+        }, 300);
+
+        // Move to random position
+        setTimeout(() => {
+          moveToRandomPosition();
+        }, 100);
+
+        // CHAOS MODE at count 5!
+        if (errorCount === 5 && !chaosMode) {
+          activateChaosMode();
+        }
+      }
+
+      // ACTIVATE TOTAL CHAOS!
+      function activateChaosMode() {
+        chaosMode = true;
+
+        // Spawn 15 dialogs immediately!
+        for (let i = 0; i < 15; i++) {
+          setTimeout(() => {
+            spawnMovingDialog();
+          }, i * 100);
+        }
+
+        // Keep spawning more dialogs continuously
+        setInterval(() => {
+          if (chaosMode && allDialogs.length < 30) {
+            spawnMovingDialog();
+          }
+        }, 2000);
+
+        // Make ALL dialogs move continuously
+        setInterval(() => {
+          allDialogs.forEach((dialog) => {
+            if (document.body.contains(dialog)) {
+              moveDialogToRandomPosition(dialog);
+            }
+          });
+          moveToRandomPosition(); // Move main dialog too
+        }, 800);
+      }
+
+      // Spawn a new moving dialog
+      function spawnMovingDialog() {
+        const newDialog = errorWindow.cloneNode(true);
+        newDialog.removeAttribute("id");
+        document.body.appendChild(newDialog);
+        allDialogs.push(newDialog);
+
+        // Random initial position
+        moveDialogToRandomPosition(newDialog);
+
+        // Add click handlers
+        const okBtn = newDialog.querySelector(".ok-button");
+        const closeBtn = newDialog.querySelector(".close-btn");
+
+        const removeDialog = () => {
+          const index = allDialogs.indexOf(newDialog);
+          if (index > -1) {
+            allDialogs.splice(index, 1);
+          }
+          newDialog.remove();
+
+          // Spawn 2 more dialogs when one is closed! MUHAHAHA
+          if (chaosMode && allDialogs.length < 25) {
+            setTimeout(() => spawnMovingDialog(), 100);
+            setTimeout(() => spawnMovingDialog(), 300);
+          }
+        };
+
+        okBtn.onclick = removeDialog;
+        closeBtn.onclick = removeDialog;
+
+        // Shake animation
+        newDialog.classList.add("shake-animation");
+        setTimeout(() => {
+          newDialog.classList.remove("shake-animation");
+        }, 300);
+      }
+
+      // Initialize
+      window.addEventListener("load", () => {
+        initPosition();
+      });
+
+      // Responsive resize
+      window.addEventListener("resize", () => {
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const dialogWidth = errorWindow.offsetWidth;
+        const dialogHeight = errorWindow.offsetHeight;
+
+        const currentLeft = parseInt(errorWindow.style.left) || 0;
+        const currentTop = parseInt(errorWindow.style.top) || 0;
+
+        if (currentLeft + dialogWidth > windowWidth) {
+          errorWindow.style.left = windowWidth - dialogWidth - 20 + "px";
+        }
+        if (currentTop + dialogHeight > windowHeight) {
+          errorWindow.style.top = windowHeight - dialogHeight - 20 + "px";
+        }
+      });
+
+      // Easter egg: Press R to reset
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "r" || e.key === "R") {
+          location.reload();
+        }
+      });
+    </script>
+  </body>
 </html>
